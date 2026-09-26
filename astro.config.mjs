@@ -6,10 +6,14 @@ export default defineConfig({
   site: 'https://github.io',
   base: '/Astro_Enseignement_PC',
   
+  // 🟩 Fixed: Tells Astro to treat assets as standard static public paths
+  legacy: {
+    collections: true,
+  },
+  
   integrations: [
     starlight({
       title: 'Physique-Chimie Collège',
-      // 🟩 Fixed: Converted to a flat array using the modern layout
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com' }
       ],
