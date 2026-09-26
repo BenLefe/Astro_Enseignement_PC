@@ -1,7 +1,9 @@
 name: Compilation et Déploiement Statique Astro
 on:
+  push:
+    branches: [main] # 🟩 Forces the runner to wake up automatically on every local git push !
   repository_dispatch:
-    types: [build_from_release] # Listens to the curl ping from Enseignement_PC
+    types: [build_from_release]
 
 permissions:
   contents: read
@@ -20,7 +22,7 @@ jobs:
         with:
           repository: 'BenLefe/Enseignement_PC'
           token: ${{ secrets.ASTRO_DEPLOY_TOKEN }}
-          path: 'src/content/docs' # Starlight looks inside src/content/docs/ for your Markdown files !
+          path: 'src/content/docs'
 
       - name: Installer Node.js
         uses: actions/setup-node@v4
@@ -29,7 +31,12 @@ jobs:
           cache: 'npm'
 
       - name: Installer les dépendances d'Astro
-        run: npm ci
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
 
       - name: Compiler le site statique (Build)
         run: npm run build
@@ -44,4 +51,3 @@ jobs:
 
       - name: Déployer sur GitHub Pages
         uses: actions/deploy-pages@v4
-
