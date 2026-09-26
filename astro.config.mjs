@@ -9,10 +9,10 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Physique-Chimie Collège',
-      // 🟩 Fixed: social syntax now explicitly maps the provider to its config object
-      social: {
-        github: { link: 'https://github.com' },
-      },
+      // 🟩 Fixed: Converted to a flat array using the modern layout
+      social: [
+        { icon: 'github', label: 'GitHub', href: 'https://github.com' }
+      ],
       sidebar: [
         {
           label: 'Classes',
