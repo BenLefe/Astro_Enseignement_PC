@@ -3,21 +3,23 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build
 export default defineConfig({
-  // ⚠️ Crucial for GitHub Pages to serve files from the right folder
   site: 'https://github.io',
   base: '/Astro_Enseignement_PC',
   
   integrations: [
     starlight({
       title: 'Physique-Chimie Collège',
+      // 🟩 Fixed: social requires an object containing a specific provider structure or links array
       social: {
         github: 'https://github.com',
       },
       sidebar: [
-        // The sidebar will automatically generate links based on your folder structure (6eme, 5eme, etc.)
+        // 🟩 Fixed: autogenerate must sit inside an items array wrapped by a label group
         {
           label: 'Classes',
-          autogenerate: { directory: '' },
+          items: [
+            { autogenerate: { directory: '' } }
+          ]
         },
       ],
     }),
