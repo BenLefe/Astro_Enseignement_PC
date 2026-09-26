@@ -1,7 +1,7 @@
 name: Compilation et Déploiement Statique Astro
 on:
   push:
-    branches: [main] # 🟩 Forces the runner to wake up automatically on every local git push !
+    branches: [main] # Kept local push active to let you test immediately !
   repository_dispatch:
     types: [build_from_release]
 
@@ -27,7 +27,7 @@ jobs:
       - name: Installer Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24 # 🟩 Updated to Node 24 to match GitHub requirements !
           cache: 'npm'
 
       - name: Installer les dépendances d'Astro
