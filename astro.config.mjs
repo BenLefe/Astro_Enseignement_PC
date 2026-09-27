@@ -5,7 +5,7 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
 export default defineConfig({
-  site: 'https://benlefe.github.io',
+  site: 'https://github.io',
   base: '/Astro_Enseignement_PC',
   
   integrations: [
@@ -21,15 +21,8 @@ export default defineConfig({
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com' }
       ],
-      // 🟩 Switched CDN provider from jsdelivr to cdnjs (Cloudflare) to bypass connection timeouts !
-      head: [
-        {
-          tag: 'link',
-          attrs: {
-            rel: 'stylesheet',
-            href: 'https://cloudflare.com',
-          },
-        },
+      customCss: [
+        './src/styles/custom.css',
       ],
       markdown: {
         remarkPlugins: [remarkMath],
