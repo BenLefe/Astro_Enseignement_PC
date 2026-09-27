@@ -1,4 +1,4 @@
-/* 🟩 Prevents text doubling by completely hiding the accessibility layer from raw visual display */
+/* 1. Masque la couche brute d'accessibilité sans bloquer le rendu LaTeX */
 .katex-mathml {
   position: absolute;
   clip: rect(1px, 1px, 1px, 1px);
@@ -10,12 +10,26 @@
   white-space: nowrap;
 }
 
-/* Prevent Starlight from collapsing math formulas and radical signs */
+/* 2. Empêche Starlight de masquer ou d'écraser les symboles et polices de KaTeX */
+.katex-html {
+  display: inline-block !important;
+}
+
 .katex-html svg {
   height: inherit !important;
   display: inline !important;
 }
 
+/* 3. Force l'utilisation des polices scientifiques officielles de KaTeX */
 .katex {
-  font-size: 1.05em;
+  font: normal 1.1em KaTeX_Main, Times New Roman, serif !important;
+  line-height: 1.2 !important;
+  text-rendering: auto !important;
+}
+
+.katex-display {
+  display: block !important;
+  margin: 1em 0 !important;
+  width: 100% !important;
+  text-align: center !important;
 }
