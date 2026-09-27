@@ -1,9 +1,21 @@
-/* Empêche Starlight de masquer les éléments graphiques et formules de KaTeX */
+/* 🟩 Prevents text doubling by completely hiding the accessibility layer from raw visual display */
+.katex-mathml {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Prevent Starlight from collapsing math formulas and radical signs */
 .katex-html svg {
   height: inherit !important;
   display: inline !important;
 }
 
 .katex {
-  font-size: 1.1em; /* Rend les formules légèrement plus lisibles pour vos élèves */
+  font-size: 1.05em;
 }
