@@ -1,16 +1,7 @@
-/* 1. Masque la couche brute d'accessibilité sans bloquer le rendu LaTeX */
 .katex-mathml {
-  position: absolute;
-  clip: rect(1px, 1px, 1px, 1px);
-  padding: 0;
-  border: 0;
-  height: 1px;
-  width: 1px;
-  overflow: hidden;
-  white-space: nowrap;
+  display: none !important;
 }
 
-/* 2. Empêche Starlight de masquer ou d'écraser les symboles et polices de KaTeX */
 .katex-html {
   display: inline-block !important;
 }
@@ -18,18 +9,4 @@
 .katex-html svg {
   height: inherit !important;
   display: inline !important;
-}
-
-/* 3. Force l'utilisation des polices scientifiques officielles de KaTeX */
-.katex {
-  font: normal 1.1em KaTeX_Main, Times New Roman, serif !important;
-  line-height: 1.2 !important;
-  text-rendering: auto !important;
-}
-
-.katex-display {
-  display: block !important;
-  margin: 1em 0 !important;
-  width: 100% !important;
-  text-align: center !important;
 }
