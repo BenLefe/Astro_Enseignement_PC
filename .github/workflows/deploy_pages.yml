@@ -1,7 +1,7 @@
 name: Compilation et Déploiement Statique Astro
 on:
   push:
-    branches: [main]
+    branches: [main] # Keeps local push active to let you test immediately
   repository_dispatch:
     types: [build_from_release]
 
@@ -24,11 +24,18 @@ jobs:
           token: ${{ secrets.ASTRO_DEPLOY_TOKEN }}
           path: 'src/content/docs'
 
-      # 🟩 Étape modifiée : Transforme automatiquement votre README en page d'accueil Starlight
       - name: Transformer le README.md en index.md
         run: |
           if [ -f src/content/docs/README.md ]; then
             mv src/content/docs/README.md src/content/docs/index.md
+          fi
+
+      # 🟩 Core Asset Routing step: Relocates your book storage to Astro's public root folder
+      - name: Déplacer les assets vers le dossier public d'Astro
+        run: |
+          if [ -d src/content/docs/asset ]; then
+            mkdir -p public
+            mv src/content/docs/asset public/asset
           fi
 
       - name: Installer Node.js
