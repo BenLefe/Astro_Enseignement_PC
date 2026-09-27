@@ -22,7 +22,8 @@ export default defineConfig({
         { icon: 'github', label: 'GitHub', href: 'https://github.com' }
       ],
       customCss: [
-        './src/styles/custom.css',
+        'katex/dist/katex.min.css',     // Charge le CSS officiel ultra-rapidement en local !
+        './src/styles/custom.css',       // Conserve votre fichier pour corriger les bugs d'affichage
       ],
       markdown: {
         remarkPlugins: [remarkMath],

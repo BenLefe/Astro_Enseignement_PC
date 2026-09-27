@@ -1,1 +1,9 @@
-@import "katex/dist/katex.min.css";
+/* Empêche Starlight de masquer les éléments graphiques et formules de KaTeX */
+.katex-html svg {
+  height: inherit !important;
+  display: inline !important;
+}
+
+.katex {
+  font-size: 1.1em; /* Rend les formules légèrement plus lisibles pour vos élèves */
+}
