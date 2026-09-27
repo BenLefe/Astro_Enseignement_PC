@@ -1,0 +1,30 @@
+---
+interface Props {
+  src: string;
+  height?: string;
+}
+
+const { src, height = "600px" } = Astro.props;
+
+// Automatically handle the base path prefix
+const fullSrc = src.startsWith('/Astro_Enseignement_PC') ? src : `/Astro_Enseignement_PC${src}`;
+
+// Build the public internet absolute URL for the Google mobile viewer backup
+const absoluteUrl = `https://github.io${fullSrc}`;
+---
+
+<div class="pdf-wrapper" style="margin: 1.5rem 0; width: 100%;">
+  <!-- Mobile & Tablet friendly canvas viewer -->
+  <iframe 
+    src={`https://google.com{encodeURIComponent(absoluteUrl)}&embedded=true`} 
+    width="100%" 
+    height={height} 
+    style="border: 1px solid var(--sl-color-gray-5); border-radius: 8px; background: #fff;"
+    allowfullscreen
+  />
+  
+  <!-- Safe external text link below the frame for mobile troubleshooting -->
+  <p style="margin-top: 0.5rem; font-size: 0.85rem; text-align: right;">
+    Si le document ne s'affiche pas, <a href={fullSrc} target="_blank" rel="noopener noreferrer">cliquez ici pour le télécharger</a>.
+  </p>
+</div>
