@@ -8,6 +8,12 @@ export default defineConfig({
   site: 'https://github.io',
   base: '/Astro_Enseignement_PC',
   
+  // 🟩 Les plugins mathématiques doivent être déclarés ICI, à la racine d'Astro !
+  markdown: {
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex],
+  },
+  
   integrations: [
     AutoImport({
       imports: [
@@ -21,14 +27,19 @@ export default defineConfig({
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com' }
       ],
-      customCss: [
-        'katex/dist/katex.min.css',     // Charge le CSS officiel ultra-rapidement en local !
-        './src/styles/custom.css',       // Conserve votre fichier pour corriger les bugs d'affichage
+      // Injection de la feuille de style KaTeX officielle (Cloudflare) via l'entête
+      head: [
+        {
+          tag: 'link',
+          attrs: {
+            rel: 'stylesheet',
+            href: 'https://cloudflare.com',
+          },
+        },
       ],
-      markdown: {
-        remarkPlugins: [remarkMath],
-        rehypePlugins: [rehypeKatex],
-      },
+      customCss: [
+        './src/styles/custom.css',
+      ],
       sidebar: [
         { label: '6ème', items: [{ autogenerate: { directory: '6eme' } }] },
         { label: '5ème', items: [{ autogenerate: { directory: '5eme' } }] },
