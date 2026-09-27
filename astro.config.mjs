@@ -5,7 +5,7 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
 export default defineConfig({
-  site: 'https://github.io',
+  site: 'https://benlefe.github.io',
   base: '/Astro_Enseignement_PC',
   
   integrations: [
@@ -21,17 +21,16 @@ export default defineConfig({
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com' }
       ],
-      // Math styles injection to make formulas crisp and beautiful
+      // 🟩 Switched CDN provider from jsdelivr to cdnjs (Cloudflare) to bypass connection timeouts !
       head: [
         {
           tag: 'link',
           attrs: {
             rel: 'stylesheet',
-            href: 'https://jsdelivr.net',
+            href: 'https://cloudflare.com',
           },
         },
       ],
-      // Registering the mathematical engine rules
       markdown: {
         remarkPlugins: [remarkMath],
         rehypePlugins: [rehypeKatex],
