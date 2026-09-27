@@ -8,6 +8,12 @@ export default defineConfig({
   site: 'https://github.io',
   base: '/Astro_Enseignement_PC',
   
+  // 🟩 Safe global parsing engine
+  markdown: {
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex],
+  },
+  
   integrations: [
     AutoImport({
       imports: [
@@ -21,25 +27,13 @@ export default defineConfig({
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com' }
       ],
-      // 🟩 Restored: Global CSS formatting headers to draw fractions and chemical symbols cleanly
-      head: [
-        {
-          tag: 'link',
-          attrs: {
-            rel: 'stylesheet',
-            href: 'https://cloudflare.com',
-            crossorigin: 'anonymous'
-          },
-        },
-      ],
+      // 🟩 Completely clean of fragile, cross-origin external CDN links !
+      head: [],
+      // 🟩 Loads KaTeX's styles directly using local node modules distribution paths
       customCss: [
+        'katex/dist/katex.min.css',
         './src/styles/custom.css',
       ],
-      // 🟩 Fixed Layout: Uses the updated unified wrapper schema required by Astro
-      markdown: {
-        remarkPlugins: [remarkMath],
-        rehypePlugins: [[rehypeKatex, { strict: false, trust: true }]],
-      },
       sidebar: [
         { label: '6ème', items: [{ autogenerate: { directory: '6eme' } }] },
         { label: '5ème', items: [{ autogenerate: { directory: '5eme' } }] },
