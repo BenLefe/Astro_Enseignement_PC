@@ -10,3 +10,49 @@
   height: inherit !important;
   display: inline !important;
 }
+
+/* ==========================================
+   🔬 CUSTOM PHYSICS & CHEMISTRY SITE THEME
+   ========================================== */
+
+/* ☀️ FORCED LIGHT MODE ENGINE OVERRIDES */
+:root[data-theme='light'] {
+  /* Brand Accent Tokens (Based on your exact RGBA specs) */
+  --sl-color-accent-low: rgba(20, 63, 190, 0.93);     /* #143fbe -> Electric Blue */
+  --sl-color-accent: rgba(16, 166, 190, 0.93);         /* #10a6be -> Teal Blue-Green */
+  --sl-color-accent-high: rgba(93, 86, 165, 0.93);    /* #5d56a5 -> Academic Indigo */
+
+  /* Neutral Background Surfaces & Layout Boxes */
+  --sl-color-bg: #f1f5f9;                     /* Light grayish slate to prevent student eye strain */
+  --sl-color-bg-nav: #ffffff;                 /* Pure white navigation header layouts */
+  --sl-color-bg-sidebar: #ffffff;             /* Explicitly forces white sidebars */
+  --sl-color-bg-inline-code: #e2e8f0;         /* Soft light backing card for LaTeX math words */
+  
+  /* Text Contrast & Structural Borders */
+  --sl-color-text: #0f172a;                   /* Dark Slate near-black for maximum text legibility */
+  --sl-color-gray-1: #0f172a;                 /* Sharp page titles and subheaders */
+  --sl-color-gray-2: #334155;                 /* Medium contrast descriptions */
+  --sl-color-gray-5: rgba(92, 129, 160, 0.93); /* #5c81a0 -> Your custom Muted Slate dividers */
+  --sl-color-gray-6: #cbd5e1;                 /* Outer structural borders */
+}
+
+/* 🌙 FORCED DARK MODE ENGINE OVERRIDES */
+:root[data-theme='dark'] {
+  /* Brand Accent Tokens (Calibrated for high-contrast neon readability against space darks) */
+  --sl-color-accent-low: rgba(16, 166, 190, 0.93);    /* Teal accents stand out perfectly in dark environments */
+  --sl-color-accent: #33ccff;                         /* High-contrast Neon Cyan for core action elements */
+  --sl-color-accent-high: rgba(93, 86, 165, 0.93);   /* Academic Indigo for active menu focus indicators */
+
+  /* Neutral Background Surfaces & Layout Boxes */
+  --sl-color-bg: #0f172a;                     /* Dark Space Blue main text canvas */
+  --sl-color-bg-nav: #1e293b;                 /* Darker slate panel backing cards */
+  --sl-color-bg-sidebar: #1e293b;             /* Matching dark sidebar paneling */
+  --sl-color-bg-inline-code: #334155;         /* Muted padding frames surrounding math symbols */
+  
+  /* Text Contrast & Structural Borders */
+  --sl-color-text: #f8fafc;                   /* Soft bone-white readable paragraph text */
+  --sl-color-gray-1: #ffffff;                 /* Brilliant pure white lesson titles */
+  --sl-color-gray-2: #e2e8f0;                 /* Clear secondary text highlights */
+  --sl-color-gray-5: rgba(92, 129, 160, 0.93); /* Muted Slate grid lines */
+  --sl-color-gray-6: #334155;                 /* Dark outer division borders */
+}
