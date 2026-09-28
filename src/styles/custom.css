@@ -56,3 +56,68 @@
   --sl-color-gray-5: rgba(92, 129, 160, 0.93); /* Muted Slate grid lines */
   --sl-color-gray-6: #334155;                 /* Dark outer division borders */
 }
+
+/* ========================================================
+   🔗 AMÉLIORATION DU CONTRASTE DES LIENS (DARK MODE)
+   ======================================================== */
+
+/* Force les liens du texte à s'afficher en bleu clair éclatant dans le mode sombre */
+:root[data-theme='dark'] .sl-markdown-content a {
+  color: #33ccff !important;                   /* Bleu clair / Cyan haute visibilité */
+  text-decoration: underline !important;       /* Force le soulignement pour l'accessibilité DYS */
+  text-underline-offset: 0.2em !important;     /* Éloigne légèrement le trait pour ne pas couper les lettres */
+  font-weight: bold !important;                /* Rend le lien plus épais pour se repérer facilement */
+}
+
+/* Changement de couleur interactif lors du survol de la souris */
+:root[data-theme='dark'] .sl-markdown-content a:hover {
+  color: #60a5fa !important;                   /* Bleu ciel légèrement plus doux au survol */
+}
+
+/* ========================================================
+   ♿ ACCESSIBILITÉ : TYPOGRAPHIE DYS & INTERLIGNE 1.5
+   ======================================================== */
+
+/* Importation de la police Comic Neue (très lisible pour les Dys) */
+@import url('https://googleapis.com');
+
+:root, :root[data-theme='light'], :root[data-theme='dark'] {
+  /* 1. Force l'utilisation de la police adaptée */
+  --sl-font-text: 'Comic Neue', 'OpenDyslexic', 'Arial', sans-serif !important;
+  
+  /* 2. Augmentation générale de la taille de base de Starlight */
+  --sl-text-base: 15px !important; /* Légèrement plus grand que 14px pour compenser les grands espaces */
+  --sl-text-sm: 13px !important;
+  --sl-text-xs: 12px !important;
+}
+
+/* 3. Ciblage de tout le contenu des cours (Paragraphes, listes, éléments internes) */
+.sl-markdown-content p,
+.sl-markdown-content li,
+.sl-markdown-content ul,
+.sl-markdown-content ol,
+.sl-markdown-content table,
+.sl-markdown-content blockquote {
+  font-size: 15px !important;        /* Taille de police augmentée et bien visible */
+  
+  /* 🟩 INTERLIGNE AU SEIN DU MÊME BLOC (Double espacement) */
+  line-height: 2.2 !important;       /* Augmenté à 2.2 pour s'assurer que les lignes ne se chevauchent jamais */
+  
+  /* ESPACEMENT DES CARACTÈRES */
+  letter-spacing: 0.08em !important; /* Écarte les lettres pour éviter la confusion (b, d, p, q) */
+  word-spacing: 0.18em !important;   /* Écarte les mots pour faciliter le suivi du regard */
+  
+  /* ESPACE ENTRE LES PARAGRAPHES ET LES POINTS DE LISTE */
+  margin-top: 0.8rem !important;
+  margin-bottom: 1.8rem !important;  /* Crée un grand saut visible avant la ligne suivante */
+}
+
+/* 4. Forcer l'espacement au sein des listes à puces (entre chaque li de la même liste) */
+.sl-markdown-content li {
+  margin-bottom: 1.2rem !important;  /* Écarte fortement les puces les unes des autres */
+}
+
+/* Ajustement proportionnel des grands titres pour garder une belle hiérarchie */
+.sl-markdown-content h1 { font-size: 26px !important; line-height: 1.6 !important; margin-bottom: 2.5rem !important; }
+.sl-markdown-content h2 { font-size: 22px !important; line-height: 1.6 !important; margin-top: 3.5rem !important; margin-bottom: 1.8rem !important; }
+.sl-markdown-content h3 { font-size: 18px !important; line-height: 1.6 !important; margin-top: 2.5rem !important; margin-bottom: 1.2rem !important; }
