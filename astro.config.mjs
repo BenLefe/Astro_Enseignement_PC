@@ -4,11 +4,21 @@ import AutoImport from 'astro-auto-import';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
+// 🟩 1. FLAG TO ACTIVATE YOUR CUSTOM DOMAIN NAME LATER
+// Set this to true the day you buy your domain name (e.g., physique-college.fr)
+const USE_CUSTOM_DOMAIN = false; 
+
 export default defineConfig({
-  site: 'https://github.io',
-  base: '/Astro_Enseignement_PC',
+  // 🟩 2. FUTURE PROOF SITE URL & REPOSITORY CLEANUP
+  site: USE_CUSTOM_DOMAIN ? 'https://your-custom-domain.fr' : 'https://benlefe.github.io',
   
-  // 🟩 Safe global parsing engine
+  // 🟩 3. CONDITIONAL BASE PATH RESOLUTION
+  // Fixes local 404 dev server bugs, handles standard builds, and drops subfolders if a custom domain is active!
+  base: (process.env.NODE_ENV === 'production' && !USE_CUSTOM_DOMAIN) 
+    ? '/Astro_Enseignement_PC' 
+    : '/',
+  
+  // Safe global parsing engine
   markdown: {
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex],
@@ -24,12 +34,17 @@ export default defineConfig({
     }),
     starlight({
       title: 'Physique-Chimie Collège',
+      
+      // 🟩 4. REGISTER YOUR NEW CUSTOM FAVICON ROUTE
+      // Looks for your asset inside public/favicon.png instantly
+      favicon: '/favicon.png',
+      
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com' }
       ],
-      // 🟩 Completely clean of fragile, cross-origin external CDN links !
+      // Completely clean of fragile, cross-origin external CDN links !
       head: [],
-      // 🟩 Loads KaTeX's styles directly using local node modules distribution paths
+      // Loads KaTeX's styles directly using local node modules distribution paths
       customCss: [
         'katex/dist/katex.min.css',
         './src/styles/custom.css',
