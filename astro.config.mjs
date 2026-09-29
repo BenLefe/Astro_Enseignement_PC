@@ -36,10 +36,10 @@ export default defineConfig({
       title: 'Ravenphysis.fr : Physique-Chimie au Collège',
       
       logo: {
-        src: './src/assets/logo.png',
+        src: './src/assets/favicon2.png',
       },
 
-      favicon: '/favicon.png',
+      favicon: '/favicon.svg',
       
       // Completely clean of fragile, cross-origin external CDN links !
       head: [],
