@@ -41,9 +41,6 @@ export default defineConfig({
 
       favicon: '/favicon.png',
       
-      social: [
-        {}
-      ],
       // Completely clean of fragile, cross-origin external CDN links !
       head: [],
       // Loads KaTeX's styles directly using local node modules distribution paths
