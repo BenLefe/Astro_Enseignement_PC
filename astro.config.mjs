@@ -6,11 +6,11 @@ import rehypeKatex from 'rehype-katex';
 
 // 🟩 1. FLAG TO ACTIVATE YOUR CUSTOM DOMAIN NAME LATER
 // Set this to true the day you buy your domain name (e.g., physique-college.fr)
-const USE_CUSTOM_DOMAIN = false; 
+const USE_CUSTOM_DOMAIN = true; 
 
 export default defineConfig({
   // 🟩 2. FUTURE PROOF SITE URL & REPOSITORY CLEANUP
-  site: USE_CUSTOM_DOMAIN ? 'https://your-custom-domain.fr' : 'https://benlefe.github.io',
+  site: USE_CUSTOM_DOMAIN ? 'https://ravenphysis.fr' : 'https://benlefe.github.io',
   
   // 🟩 3. CONDITIONAL BASE PATH RESOLUTION
   // Fixes local 404 dev server bugs, handles standard builds, and drops subfolders if a custom domain is active!
