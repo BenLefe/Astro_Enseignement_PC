@@ -33,14 +33,16 @@ export default defineConfig({
       ],
     }),
     starlight({
-      title: 'Physique-Chimie Collège',
+      title: 'Ravenphysis.fr : Physique-Chimie au Collège',
       
-      // 🟩 4. REGISTER YOUR NEW CUSTOM FAVICON ROUTE
-      // Looks for your asset inside public/favicon.png instantly
+      logo: {
+        src: './src/assets/logo.png',
+      },
+
       favicon: '/favicon.png',
       
       social: [
-        { icon: 'github', label: 'GitHub', href: 'https://github.com' }
+        {}
       ],
       // Completely clean of fragile, cross-origin external CDN links !
       head: [],
