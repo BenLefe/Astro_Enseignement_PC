@@ -18,9 +18,11 @@ jobs:
       - name: Récupérer le code du framework Astro
         uses: actions/checkout@v4
 
-      # 🟩 ÉTAPE CORRECTIVE POUR ÉVITER L'ERREUR ENOENT
-      - name: Préparer l'arborescence pour les cours
-        run: mkdir -p src/content/docs
+      # 🟩 SUPPRIME LE LIEN SYMBOLIQUE BRISÉ SUR LE SERVEUR GITHUB
+      - name: Nettoyer le lien symbolique de dev et créer l'arborescence
+        run: |
+          rm -rf src/content/docs
+          mkdir -p src/content/docs
 
       - name: Cloner les cours depuis le dépôt de cours
         uses: actions/checkout@v4
