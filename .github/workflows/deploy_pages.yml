@@ -1,7 +1,7 @@
 name: Compilation et Déploiement Statique Astro
 on:
   push:
-    branches: [main] # Keeps local push active to let you test immediately
+    branches: [main]
   repository_dispatch:
     types: [build_from_release]
 
@@ -31,10 +31,13 @@ jobs:
             mv src/content/docs/README.md src/content/docs/index.md
           fi
 
+      # 🟩 AUDITED: Insulates ALL local helper scripts and workflows from public builds
       - name: Nettoyer les scripts et guides locaux du dossier de compilation
         run: |
           rm -f src/content/docs/CHEATSHEET.md
           rm -f src/content/docs/make_print_grid.py
+          rm -f src/content/docs/make_max_pack.py
+          rm -f src/content/docs/bulk_generate_grids.py
 
       # 🟩 Core Asset Routing step: Relocates your book storage to Astro's public root folder
       - name: Déplacer les assets vers le dossier public d'Astro
@@ -43,6 +46,22 @@ jobs:
             mkdir -p public
             mv src/content/docs/asset public/asset
           fi
+
+      # 🟩 AUDITED & PROVISIONED PONT AUTOMATIQUE: 
+      # Selectively extracts ONLY compartmentalized asset subfolders, keeping your .md source files private!
+      - name: Synchroniser les assets des chapitres pour le web
+        run: |
+          for level in 6eme 5eme 4eme 3eme; do
+            if [ -d "src/content/docs/$level" ]; then
+              mkdir -p "public/$level"
+              # Find and copy only internal asset folders while completely preserving your nested layout shapes
+              find "src/content/docs/$level" -type d -name "asset" | while read -r dir; do
+                rel_path=${dir#src/content/docs/}
+                mkdir -p "public/$rel_path"
+                cp -r "$dir"/* "public/$rel_path/" 2>/dev/null || true
+              done
+            fi
+          done
 
       - name: Installer Node.js
         uses: actions/setup-node@v4
