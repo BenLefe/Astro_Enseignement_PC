@@ -2,29 +2,32 @@
 interface Props {
   src: string;
   height?: string;
+  page?: number;
 }
 
-const { src, height = "600px" } = Astro.props;
+const { src, height = "600px", page = 1 } = Astro.props;
 
-// Automatically handle the base path prefix
-const fullSrc = src.startsWith('/Astro_Enseignement_PC') ? src : `/Astro_Enseignement_PC${src}`;
+// Pure web production path formatting
+const cleanSrc = src.replace('/Astro_Enseignement_PC', '');
+const fullSrc = cleanSrc.startsWith('/') ? cleanSrc : `/${cleanSrc}`;
 
-// Build the public internet absolute URL for the Google mobile viewer backup
-const absoluteUrl = `https://github.io${fullSrc}`;
+// Native page parameter mapping for the live site
+const nativeViewerUrl = `${fullSrc}#page=${page}`;
 ---
 
-<div class="pdf-wrapper" style="margin: 1.5rem 0; width: 100%;">
-  <!-- Mobile & Tablet friendly canvas viewer -->
+<div class="pdf-viewer-wrapper" style="margin: 2rem 0; width: 100%;">
   <iframe 
-    src={`https://google.com{encodeURIComponent(absoluteUrl)}&embedded=true`} 
+    src={nativeViewerUrl} 
     width="100%" 
     height={height} 
-    style="border: 1px solid var(--sl-color-gray-5); border-radius: 8px; background: #fff;"
+    style="border: 2px solid var(--sl-color-gray-5); border-radius: 8px; box-shadow: var(--sl-shadow-sm); background: #ffffff;"
     allowfullscreen
   />
   
-  <!-- Safe external text link below the frame for mobile troubleshooting -->
-  <p style="margin-top: 0.5rem; font-size: 0.85rem; text-align: right;">
-    Si le document ne s'affiche pas, <a href={fullSrc} target="_blank" rel="noopener noreferrer">cliquez ici pour le télécharger</a>.
+  <p style="margin-top: 0.6rem; font-family: 'Comic Neue', sans-serif; font-size: 0.85rem; text-align: right;">
+    📄 Si le document ne s'affiche pas : 
+    <a href={fullSrc} target="_blank" rel="noopener noreferrer" style="color: #143fbe; font-weight: bold; text-decoration: underline;">
+      Cliquez ici pour l'ouvrir directement
+    </a>.
   </p>
 </div>

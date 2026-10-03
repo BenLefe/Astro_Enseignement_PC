@@ -1,0 +1,5 @@
+# Excludes raw scripts and untitiled markdown sheets from the compiler loop
+src/content/docs/*.py
+src/content/docs/*.pdf
+src/content/docs/CHEATSHEET.md
+src/content/docs/LICENSE

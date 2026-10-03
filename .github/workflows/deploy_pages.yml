@@ -34,10 +34,9 @@ jobs:
       # 🟩 AUDITED: Insulates ALL local helper scripts and workflows from public builds
       - name: Nettoyer les scripts et guides locaux du dossier de compilation
         run: |
-          rm -f src/content/docs/CHEATSHEET.md
-          rm -f src/content/docs/make_print_grid.py
-          rm -f src/content/docs/make_max_pack.py
-          rm -f src/content/docs/bulk_generate_grids.py
+          find src/content/docs/ -maxdepth 1 -type f -name "*.py" -delete
+          find src/content/docs/ -maxdepth 1 -type f -name "*.pdf" -delete
+          find src/content/docs/ -maxdepth 1 -type f -name "*.md" ! -name "README.md" -delete
 
       # 🟩 Core Asset Routing step: Relocates your book storage to Astro's public root folder
       - name: Déplacer les assets vers le dossier public d'Astro
