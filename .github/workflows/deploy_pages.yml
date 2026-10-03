@@ -18,12 +18,6 @@ jobs:
       - name: Récupérer le code du framework Astro
         uses: actions/checkout@v4
 
-      # 🟩 SUPPRIME LE LIEN SYMBOLIQUE BRISÉ SUR LE SERVEUR GITHUB
-      - name: Nettoyer le lien symbolique de dev et créer l'arborescence
-        run: |
-          rm -rf src/content/docs
-          mkdir -p src/content/docs
-
       - name: Cloner les cours depuis le dépôt de cours
         uses: actions/checkout@v4
         with:
@@ -37,12 +31,12 @@ jobs:
             mv src/content/docs/README.md src/content/docs/index.md
           fi
 
-      # 🟩 AUDITED: Insulates ALL local helper scripts and workflows from public builds
+      # 🟩 FIXED: Protects both README.md and index.md from being deleted!
       - name: Nettoyer les scripts et guides locaux du dossier de compilation
         run: |
           find src/content/docs/ -maxdepth 1 -type f -name "*.py" -delete
           find src/content/docs/ -maxdepth 1 -type f -name "*.pdf" -delete
-          find src/content/docs/ -maxdepth 1 -type f -name "*.md" ! -name "README.md" -delete
+          find src/content/docs/ -maxdepth 1 -type f -name "*.md" ! -name "README.md" ! -name "index.md" -delete
 
       # 🟩 Core Asset Routing step: Relocates your book storage to Astro's public root folder
       - name: Déplacer les assets vers le dossier public d'Astro
