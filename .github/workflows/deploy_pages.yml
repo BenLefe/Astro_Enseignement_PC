@@ -18,6 +18,10 @@ jobs:
       - name: Récupérer le code du framework Astro
         uses: actions/checkout@v4
 
+      # 🟩 ÉTAPE CORRECTIVE POUR ÉVITER L'ERREUR ENOENT
+      - name: Préparer l'arborescence pour les cours
+        run: mkdir -p src/content/docs
+
       - name: Cloner les cours depuis le dépôt de cours
         uses: actions/checkout@v4
         with:
