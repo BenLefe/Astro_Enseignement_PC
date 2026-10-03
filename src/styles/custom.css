@@ -1,3 +1,7 @@
+
+/* Importation de la police Comic Neue (très lisible pour les Dys) */
+@import url('https://googleapis.com');
+
 .katex-mathml {
   display: none !important;
 }
@@ -77,9 +81,6 @@
 /* ========================================================
    ♿ ACCESSIBILITÉ : TYPOGRAPHIE DYS & INTERLIGNE 1.5
    ======================================================== */
-
-/* Importation de la police Comic Neue (très lisible pour les Dys) */
-@import url('https://googleapis.com');
 
 :root, :root[data-theme='light'], :root[data-theme='dark'] {
   /* 1. Force l'utilisation de la police adaptée */
