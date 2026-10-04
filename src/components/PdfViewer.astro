@@ -1,33 +1,77 @@
 ---
-interface Props {
-  src: string;
-  height?: string;
-  page?: number;
-}
+// Récupère le chemin du fichier et le numéro de page ciblé
+const { src, page } = Astro.props;
 
-const { src, height = "600px", page = 1 } = Astro.props;
-
-// Pure web production path formatting
-const cleanSrc = src.replace('/Astro_Enseignement_PC', '');
-const fullSrc = cleanSrc.startsWith('/') ? cleanSrc : `/${cleanSrc}`;
-
-// Native page parameter mapping for the live site
-const nativeViewerUrl = `${fullSrc}#page=${page}`;
+// Construit l'URL avec les paramètres d'ouverture Adobe
+const pdfUrl = page 
+  ? `${src}#page=${page}&toolbar=1&navpanes=0` 
+  : `${src}#toolbar=1&navpanes=0`;
 ---
 
-<div class="pdf-viewer-wrapper" style="margin: 2rem 0; width: 100%;">
-  <iframe 
-    src={nativeViewerUrl} 
-    width="100%" 
-    height={height} 
-    style="border: 2px solid var(--sl-color-gray-5); border-radius: 8px; box-shadow: var(--sl-shadow-sm); background: #ffffff;"
-    allowfullscreen
-  />
+<div class="pdf-container">
+  <!-- IFRAME STRICTEMENT VIDE : AUCUN CHILD BLOC POUR ÉVITER LE BUG ASTRO -->
+  <iframe src={pdfUrl} width="100%" height="700px" title="Lecteur PDF"></iframe>
   
-  <p style="margin-top: 0.6rem; font-family: 'Comic Neue', sans-serif; font-size: 0.85rem; text-align: right;">
-    📄 Si le document ne s'affiche pas : 
-    <a href={fullSrc} target="_blank" rel="noopener noreferrer" style="color: #143fbe; font-weight: bold; text-decoration: underline;">
-      Cliquez ici pour l'ouvrir directement
-    </a>.
-  </p>
+  <!-- TEXTE DE SECOURS ET LIEN DE TÉLÉCHARGEMENT EXTÉRIEUR À L'IFRAME -->
+  <div class="pdf-footer-actions">
+    <p>Le document ne s'affiche pas ?</p>
+    <a href={src} target="_blank" class="download-btn">
+      📥 Ouvrir / Télécharger le PDF {page ? `(Page ${page})` : ''}
+    </a>
+  </div>
 </div>
+
+<style>
+  .pdf-container {
+    width: 100%;
+    margin: 2.5rem 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+  }
+
+  iframe {
+    display: block;
+    border: none;
+    background: #f1f5f9;
+  }
+
+  /* Zone d'action sous le PDF pour aider les élèves sur mobile ou vieux PC */
+  .pdf-footer-actions {
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .pdf-footer-actions p {
+    margin: 0 !important;
+    color: #475569;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .download-btn {
+    display: inline-block;
+    padding: 8px 18px;
+    background-color: #143fbe !important; /* Votre bleu électrique */
+    color: #ffffff !important;
+    text-decoration: none !important;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 4px 10px rgba(20, 63, 190, 0.2);
+    transition: transform 0.2s, background-color 0.2s;
+  }
+
+  .download-btn:hover {
+    background-color: #10a6be !important; /* Votre turquoise au survol */
+    transform: scale(1.02);
+  }
+</style>
