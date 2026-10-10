@@ -5,6 +5,8 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import starlightViewModes from 'starlight-view-modes';
 
+import { unified } from '@astrojs/markdown-remark'; 
+
 const USE_CUSTOM_DOMAIN = true; 
 
 export default defineConfig({
@@ -13,9 +15,11 @@ export default defineConfig({
   publicDir: 'public',
 
   markdown: {
-        remarkPlugins: [remarkMath],
-        rehypePlugins: [rehypeKatex],
-      },
+    processor: unified({
+      remarkPlugins: [remarkMath],
+      rehypePlugins: [rehypeKatex],
+    }),
+  },
 
   integrations: [
     AutoImport({
