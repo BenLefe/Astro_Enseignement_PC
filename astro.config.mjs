@@ -12,6 +12,11 @@ export default defineConfig({
   base: (process.env.NODE_ENV === 'production' && !USE_CUSTOM_DOMAIN) ? '/Astro_Enseignement_PC' : '/',
   publicDir: 'public',
 
+  markdown: {
+        remarkPlugins: [remarkMath],
+        rehypePlugins: [rehypeKatex],
+      },
+
   integrations: [
     AutoImport({
       imports: [{ './src/components/PdfViewer.astro': [['default', 'PdfViewer']] }],
@@ -19,10 +24,6 @@ export default defineConfig({
     starlight({
       title: 'Ravenphysis.fr : Physique-Chimie au Collège',
       plugins: [starlightViewModes()],
-      markdown: {
-        remarkPlugins: [remarkMath],
-        rehypePlugins: [rehypeKatex],
-      },
       logo: { src: './src/assets/favicon2.png' },
       favicon: '/favicon.svg',
       
